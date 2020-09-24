@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 
-import { actions as notesActions } from '../store/notes';
+import { actions as notesActions } from "../store/notes";
 
 const Background = styled.div`
   width: 100%;
-  height: calc(100% - 50px);
+  hei ght: calc(100% - 50px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ const Background = styled.div`
 `;
 
 export const Dashboard = () => {
-  const [newNote, setNewNote] = useState('');
+  const [newNote, setNewNote] = useState("");
   const dispatch = useDispatch();
   const { notes } = useSelector((state) => state.notes);
   useEffect(() => {
@@ -23,28 +23,36 @@ export const Dashboard = () => {
 
   const handleInput = (e) => {
     setNewNote(e.target.value);
-  }
+  };
 
   const addNewNote = () => {
-    if(newNote) {
+    if (newNote) {
       const note = {
         text: newNote,
         time: new Date(),
-      }
-      console.log("----------", note);
+      };
       dispatch(notesActions.addNote(note));
-    } 
-  }
+    }
+  };
+
+  const delNote = (time) => {
+    const note = {
+      time,
+    };
+    dispatch(notesActions.delNote(note));
+  };
+
   return (
     <Background>
-      {
-        notes.map((note, index) =>
-          <span key={index}>
-            {note.text}
-          </span>)
-      }
+      {notes.map((note, index) => (
+        <div key={index}>
+          <span>{note.text}</span>
+          <span onClick={() => delNote(note.time)}>X</span>
+        </div>
+      ))}
       <div>
-        <input onChange={handleInput} /><button onClick={addNewNote}>Add Note</button>
+        <input onChange={handleInput} />
+        <button onClick={addNewNote}>Add Note</button>
       </div>
     </Background>
   );

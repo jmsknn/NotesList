@@ -1,10 +1,13 @@
-import { getNotesFromStorage, removeNotesInStorage, setNotesInStorage } from '../service'; 
+import {
+  getNotesFromStorage,
+  removeNotesInStorage,
+  setNotesInStorage,
+} from "../service";
 
 // Constants
-export const GET_NOTES = 'NOTES/GET_NOTES';
-export const ADD_NOTE = 'NOTES/ADD_NOTE';
-export const DEL_NOTE = 'NOTES/DEL_NOTE';
-
+export const GET_NOTES = "NOTES/GET_NOTES";
+export const ADD_NOTE = "NOTES/ADD_NOTE";
+export const DEL_NOTE = "NOTES/DEL_NOTE";
 
 //Actions
 const getNotes = () => ({
@@ -24,7 +27,7 @@ const delNote = (payload) => ({
 export const actions = {
   addNote,
   delNote,
-  getNotes
+  getNotes,
 };
 
 const INIT_STATE = {
