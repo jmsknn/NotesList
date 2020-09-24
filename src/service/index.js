@@ -1,5 +1,5 @@
-export function setNotesInStorage(userAuth) {
-  localStorage.setItem('notes', JSON.stringify(userAuth));
+export function setNotesInStorage(notes) {
+  localStorage.setItem('notes', JSON.stringify(notes));
 }
 
 export function getNotesFromStorage() {
