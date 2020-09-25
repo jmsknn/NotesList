@@ -26,7 +26,7 @@ const Text = styled.div`
 `;
 
 const NoteDescription = styled.pre`
-  max-width: 500px;
+  max-width: 600px;
   color: #666666;
   padding: 20px;
 `;
