@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import NoteForm from "../components/NoteForm";
-import { Button, LinkButton } from "../components";
+import { Button, LinkButton, NoteForm } from "../components";
 import { actions } from "../store/notes";
 import styled from "styled-components";
 
@@ -21,11 +20,12 @@ const NoteContainer = styled.div`
 `;
 
 const Text = styled.div`
+  font-size: 12px;
   text-align: center;
-  margin: 10px;
+  margin: 16px;
 `;
 
-const NoteDescription = styled.div`
+const NoteDescription = styled.pre`
   max-width: 500px;
   color: #666666;
   padding: 20px;

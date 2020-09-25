@@ -20,12 +20,12 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 10px;
   padding-top: 10px;
   background-color: #e3e3e3;
 `;
 
-const NoteForm = ({ note, onSubmit }) => {
+export const NoteForm = ({ note, onSubmit }) => {
   const [text, setText] = useState(note.text || "");
 
   const handleSubmit = (e) => {
@@ -49,5 +49,3 @@ const NoteForm = ({ note, onSubmit }) => {
     </Form>
   );
 };
-
-export default NoteForm;

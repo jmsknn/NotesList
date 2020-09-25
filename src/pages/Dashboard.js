@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import NoteList from "../components/NoteList";
+import { LinkButton, NoteList } from "../components";
 import { actions } from "../store/notes";
-import { LinkButton } from "../components";
 import styled from "styled-components";
 
 const Background = styled.div`

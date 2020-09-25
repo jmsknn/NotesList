@@ -65,9 +65,15 @@ const LinkButton = styled(Link)`
   margin-right: 5px;
 `;
 
-const NoteList = ({ notes }) => {
+export const NoteList = ({ notes }) => {
   const dispatch = useDispatch();
-  const delNote = (id) => dispatch(actions.delNote(id));
+  const delNote = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(actions.delNote(id));
+    } else {
+      return null;
+    }
+  };
 
   return (
     <Container>
@@ -85,5 +91,3 @@ const NoteList = ({ notes }) => {
     </Container>
   );
 };
-
-export default NoteList;
