@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import NoteList from "../components/NoteList";
+import { actions } from "../store/notes";
 import styled from "styled-components";
-import { actions as notesActions } from "../store/notes";
 
 const Background = styled.div`
   width: 100%;
@@ -18,26 +18,12 @@ export const Dashboard = () => {
   const { notes } = useSelector((state) => state.notes);
 
   useEffect(() => {
-    dispatch(notesActions.getNotes());
+    dispatch(actions.getNotes());
   }, [dispatch]);
-
-  const delNote = (time) => {
-    const note = {
-      time,
-    };
-    dispatch(notesActions.delNote(note));
-  };
 
   return (
     <Background>
-      {notes.map((note, index) => (
-        <div key={index}>
-          <span>{note.text}</span>
-          <Link to={`/note/${note.id}`}>Edit</Link>
-          <span onClick={() => delNote(note.time)}>X</span>
-        </div>
-      ))}
-      <Link to="/note/new">New Note</Link>
+      <NoteList notes={notes} />
     </Background>
   );
 };

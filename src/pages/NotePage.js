@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { useNote, useNotes } from "../store/selector";
 import NoteForm from "../components/NoteForm";
 import { actions } from "../store/notes";
+import styled from "styled-components";
 
 export const NotePage = () => {
   const history = useHistory();
@@ -13,6 +12,10 @@ export const NotePage = () => {
   const { notes } = useSelector((state) => state.notes || []);
   const note = notes.find((note) => note.id === id);
   const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    dispatch(actions.getNotes());
+  }, [dispatch]);
 
   const handleSave = (note) => {
     dispatch(actions.editNote(note));

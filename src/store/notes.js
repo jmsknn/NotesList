@@ -6,7 +6,7 @@ export const ADD_NOTE = "NOTES/ADD_NOTE";
 export const EDIT_NOTE = "NOTES/EDIT_NOTE";
 export const DEL_NOTE = "NOTES/DEL_NOTE";
 
-//Actions
+// Actions
 const getNotes = () => ({
   type: GET_NOTES,
 });
@@ -21,9 +21,9 @@ const editNote = (payload) => ({
   payload,
 });
 
-const delNote = (payload) => ({
+const delNote = (id) => ({
   type: DEL_NOTE,
-  payload,
+  id,
 });
 
 export const actions = {
@@ -37,10 +37,12 @@ const INIT_STATE = {
   notes: [],
 };
 
+// Reducers
 export default function notesReducer(state = INIT_STATE, action) {
   switch (action.type) {
     case GET_NOTES: {
       const notes = getNotesFromStorage() || [];
+
       return {
         ...state,
         notes,
@@ -67,8 +69,9 @@ export default function notesReducer(state = INIT_STATE, action) {
       };
     }
     case DEL_NOTE: {
-      const notes = state.notes.filter((note) => note.id !== action.payload.id);
+      const notes = state.notes.filter((note) => note.id !== action.id);
       setNotesInStorage(notes);
+
       return {
         ...state,
         notes,

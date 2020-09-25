@@ -1,7 +1,7 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { createBrowserHistory } from 'history';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
-import notesReducer from './notes';
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { createBrowserHistory } from "history";
+import { routerMiddleware, connectRouter } from "connected-react-router";
+import notesReducer from "./notes";
 
 export const history = createBrowserHistory();
 
@@ -11,9 +11,6 @@ const rootReducer = combineReducers({
   notes: notesReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(...middlewares),
-);
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;
