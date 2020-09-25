@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
 import { actions as notesActions } from "../store/notes";
 
 const Background = styled.div`
   width: 100%;
-  hei ght: calc(100% - 50px);
+  height: calc(100% - 50px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,26 +14,12 @@ const Background = styled.div`
 `;
 
 export const Dashboard = () => {
-  const [newNote, setNewNote] = useState("");
   const dispatch = useDispatch();
   const { notes } = useSelector((state) => state.notes);
+
   useEffect(() => {
     dispatch(notesActions.getNotes());
   }, [dispatch]);
-
-  const handleInput = (e) => {
-    setNewNote(e.target.value);
-  };
-
-  const addNewNote = () => {
-    if (newNote) {
-      const note = {
-        text: newNote,
-        time: new Date(),
-      };
-      dispatch(notesActions.addNote(note));
-    }
-  };
 
   const delNote = (time) => {
     const note = {
@@ -47,13 +33,11 @@ export const Dashboard = () => {
       {notes.map((note, index) => (
         <div key={index}>
           <span>{note.text}</span>
+          <Link to={`/note/${note.id}`}>Edit</Link>
           <span onClick={() => delNote(note.time)}>X</span>
         </div>
       ))}
-      <div>
-        <input onChange={handleInput} />
-        <button onClick={addNewNote}>Add Note</button>
-      </div>
+      <Link to="/note/new">New Note</Link>
     </Background>
   );
 };

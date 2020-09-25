@@ -1,12 +1,9 @@
-import {
-  getNotesFromStorage,
-  removeNotesInStorage,
-  setNotesInStorage,
-} from "../service";
+import { getNotesFromStorage, setNotesInStorage } from "../service";
 
 // Constants
 export const GET_NOTES = "NOTES/GET_NOTES";
 export const ADD_NOTE = "NOTES/ADD_NOTE";
+export const EDIT_NOTE = "NOTES/EDIT_NOTE";
 export const DEL_NOTE = "NOTES/DEL_NOTE";
 
 //Actions
@@ -19,6 +16,11 @@ const addNote = (payload) => ({
   payload,
 });
 
+const editNote = (payload) => ({
+  type: EDIT_NOTE,
+  payload,
+});
+
 const delNote = (payload) => ({
   type: DEL_NOTE,
   payload,
@@ -26,6 +28,7 @@ const delNote = (payload) => ({
 
 export const actions = {
   addNote,
+  editNote,
   delNote,
   getNotes,
 };
@@ -44,19 +47,27 @@ export default function notesReducer(state = INIT_STATE, action) {
       };
     }
     case ADD_NOTE: {
-      removeNotesInStorage();
-      let notes = state.notes.slice();
-      notes.push(action.payload);
+      const notes = [...state.notes, action.payload];
       setNotesInStorage(notes);
+
+      return {
+        ...state,
+        notes,
+      };
+    }
+    case EDIT_NOTE: {
+      const notes = state.notes.map((note) =>
+        note.id === action.payload.id ? action.payload : note
+      );
+      setNotesInStorage(notes);
+
       return {
         ...state,
         notes,
       };
     }
     case DEL_NOTE: {
-      removeNotesInStorage();
-      let notes = state.notes.slice();
-      notes = notes.filter((item) => item.time !== action.payload.time);
+      const notes = state.notes.filter((note) => note.id !== action.payload.id);
       setNotesInStorage(notes);
       return {
         ...state,
