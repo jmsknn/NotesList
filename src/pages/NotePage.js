@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NoteForm from "../components/NoteForm";
 import { Button, LinkButton } from "../components";
 import { actions } from "../store/notes";

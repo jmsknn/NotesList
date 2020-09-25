@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as uuid from "uuid";
 import styled from "styled-components";
 import NoteForm from "../components/NoteForm";

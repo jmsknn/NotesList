@@ -10,6 +10,6 @@ export const LinkButton = styled(Link)`
   color: white;
   text-align: center;
   border-radius: 4px;
-  border: 1px solid #104e80;
+  border: none;
   cursor: pointer;
 `;
