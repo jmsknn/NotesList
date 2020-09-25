@@ -11,6 +11,7 @@ const Container = styled.div`
 
 const Row = styled.div`
   display: flex;
+  min-height: 80px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +23,7 @@ const Row = styled.div`
   box-shadow: 2px 2px blow #efefef;
 `;
 
-const Text = styled.div`
+const Text = styled.pre`
   max-width: 300px;
   min-width: 200px;
   color: #666666;
@@ -75,13 +76,19 @@ export const NoteList = ({ notes }) => {
     }
   };
 
+  const viewingText = (note) => {
+    console.log("note", note.text);
+    const lines = note.text.split("\n");
+    let text = lines[0].length > 30 ? lines[0].slice(0, 30) + "..." : lines[0];
+    if (lines.length > 2) text += "\n...";
+    return text;
+  };
+
   return (
     <Container>
       {notes.map((note, index) => (
         <Row key={index}>
-          <Text>{`${
-            note.text.length > 30 ? note.text.slice(0, 30) + "..." : note.text
-          }`}</Text>
+          <Text>{viewingText(note)}</Text>
           <Controls>
             <LinkButton to={`/note/${note.id}`}>Show</LinkButton>
             <Button onClick={() => delNote(note.id)}>Delete</Button>

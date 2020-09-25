@@ -29,7 +29,6 @@ const NoteDescription = styled.pre`
   max-width: 500px;
   color: #666666;
   padding: 20px;
-  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
