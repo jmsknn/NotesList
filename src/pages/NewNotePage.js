@@ -15,19 +15,6 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const LinkButton = styled(Link)`
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 12px;
-  background-color: #104e80;
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid #104e80;
-  margin-top: 20px;
-`;
-
 export const NewNotePage = () => {
   const note = { text: "" };
   const dispatch = useDispatch();
@@ -47,7 +34,6 @@ export const NewNotePage = () => {
   return (
     <Container>
       <NoteForm note={note} onSubmit={handleSave} />
-      <LinkButton to="/">Back</LinkButton>
     </Container>
   );
 };

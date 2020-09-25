@@ -1,28 +1,28 @@
 import React, { useState } from "react";
+import { Button } from "./Button";
+import { LinkButton } from "./LinkButton";
 import styled from "styled-components";
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const Textarea = styled.textarea`
-  min-width: 250px;
-  padding: 5px;
+  min-width: 500px;
+  min-height: 200px;
+  padding: 20px;
+  margin: 10px;
 `;
 
-const Button = styled.button`
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 12px;
-  background-color: #104e80;
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid #104e80;
-  margin-top: 20px;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 30px;
+  padding-top: 10px;
+  background-color: #e3e3e3;
 `;
 
 const NoteForm = ({ note, onSubmit }) => {
@@ -35,10 +35,17 @@ const NoteForm = ({ note, onSubmit }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} />
-      <Button type="submit" disabled={!text}>
-        Save
-      </Button>
+      <Textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder={"Please input the note..."}
+      />
+      <ButtonContainer>
+        <Button type="submit" disabled={!text}>
+          Save
+        </Button>
+        <LinkButton to="/">Back</LinkButton>
+      </ButtonContainer>
     </Form>
   );
 };

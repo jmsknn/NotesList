@@ -2,8 +2,44 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import NoteForm from "../components/NoteForm";
+import { Button, LinkButton } from "../components";
 import { actions } from "../store/notes";
 import styled from "styled-components";
+
+const Container = styled.div`
+  width: 100%;
+  height: calc(100% - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const NoteContainer = styled.div`
+  min-width: 400px;
+  background-color: white;
+`;
+
+const Text = styled.div`
+  text-align: center;
+  margin: 10px;
+`;
+
+const NoteDescription = styled.div`
+  max-width: 500px;
+  color: #666666;
+  padding: 20px;
+  text-align: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  padding-top: 10px;
+  background-color: #e3e3e3;
+`;
 
 export const NotePage = () => {
   const dispatch = useDispatch();
@@ -11,56 +47,6 @@ export const NotePage = () => {
   const { notes } = useSelector((state) => state.notes || []);
   const note = notes.find((note) => note.id === id);
   const [edit, setEdit] = useState(false);
-
-  const Container = styled.div`
-    width: 100%;
-    height: calc(100% - 50px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  `;
-
-  const Text = styled.div`
-    text-align: center;
-    margin: 10px;
-  `;
-
-  const NoteDescription = styled.div`
-    padding: 20px;
-    color: #666666;
-  `;
-
-  const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-  `;
-
-  const Button = styled.button`
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 12px;
-    background-color: #104e80;
-    color: white;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #104e80;
-  `;
-
-  const LinkButton = styled(Link)`
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 12px;
-    background-color: #104e80;
-    color: white;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #104e80;
-  `;
 
   useEffect(() => {
     dispatch(actions.getNotes());
@@ -74,21 +60,21 @@ export const NotePage = () => {
   return (
     <Container>
       {note && (
-        <div>
+        <NoteContainer>
           <Text>Created at {new Date(note.createdAt).toLocaleString()}</Text>
           <Text>Updated at {new Date(note.updatedAt).toLocaleString()}</Text>
           {edit ? (
             <NoteForm note={note} onSubmit={handleSave} />
           ) : (
-            <>
+            <div>
               <NoteDescription>{note.text}</NoteDescription>
               <ButtonContainer>
                 <Button onClick={() => setEdit(true)}>Edit</Button>
                 <LinkButton to="/">Back</LinkButton>
               </ButtonContainer>
-            </>
+            </div>
           )}
-        </div>
+        </NoteContainer>
       )}
     </Container>
   );
