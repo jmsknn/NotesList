@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actions } from "../store/notes";
 import styled from "styled-components";
@@ -52,20 +52,6 @@ const Button = styled.button`
   border-radius: 4px;
   border: 1px solid #dc004e;
   cursor: pointer;
-`;
-
-const LinkButton = styled(Link)`
-  width: 50px;
-  height: 20px;
-  line-height: 20px;
-  font-size: 10px;
-  font-weight: 600;
-  background-color: #104e80;
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid #104e80;
-  margin-right: 5px;
 `;
 
 export const NoteList = ({ notes }) => {
